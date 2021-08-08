@@ -43,7 +43,7 @@ def run_tests_for(browsers_list):
     test_cases = create_test_cases(browsers_list)
     total      = len(test_cases)
     current    = 0
-    log_test_info('*' * 140,         'CoreySchafer_reverse_chronological_videos_list.log', 'CoreySchafer_chronological_videos_list.log')
+    log_test_info('*' * 140,        'CoreySchafer_reverse_chronological_videos_list.log', 'CoreySchafer_chronological_videos_list.log')
     log_test_info('Running tests!', 'CoreySchafer_reverse_chronological_videos_list.log', 'CoreySchafer_chronological_videos_list.log')
     while current < total:
         # each test_case is a ListCreator instance with
@@ -172,7 +172,7 @@ def verify_update(driver, schafer5_url, test_file, full_file, log_file):
         use_partial_md_only
         ]
     for create_file in variations:
-        is_reverse_chronological = vars   (driver)["reverse_chronological"]
+        is_reverse_chronological = vars   (driver)['reverse_chronological']
         driver_name              = getattr(driver, 'driver')
         log_test_info(f'TESTING list_creator with list_creator.reverse_chronological set to {is_reverse_chronological} for {driver_name}driver', log_file)
         if is_reverse_chronological: suffix = 'reverse_chronological_videos_list'

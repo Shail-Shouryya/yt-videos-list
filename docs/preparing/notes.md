@@ -254,7 +254,7 @@ count(2)
 
 
 ### figuring out if a variable exists
-- commit [`a756485b66e0c06831ff9b4b42a8b0cc36a38721`](https://github.com/Shail-Shouryya/yt-videos-list/commit/a756485b66e0c06831ff9b4b42a8b0cc36a38721)
+- commit a756485b66e0c06831ff9b4b42a8b0cc36a38721
 ```python
 'myVar' in vars()
 'myVar' in vars(__builtins__)
@@ -268,7 +268,7 @@ hasattr(obj, 'attr_name')
 
 
 ### copying a file
-- see commit [`bdba91c3fcd584e2fc1b49a3398a168637f17e3d`](https://github.com/Shail-Shouryya/yt-videos-list/commit/bdba91c3fcd584e2fc1b49a3398a168637f17e3d)
+- see commit bdba91c3fcd584e2fc1b49a3398a168637f17e3d
 - [How do I copy a file in Python?](https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python) - Stack Overflow
 
 
@@ -281,7 +281,7 @@ hasattr(obj, 'attr_name')
 
 
 ### renaming a pre-existing file (Windows problem)
-- see commit [`edd2e21d612af1164afd52666b280d24bc8b21c0`](https://github.com/Shail-Shouryya/yt-videos-list/commit/edd2e21d612af1164afd52666b280d24bc8b21c0)
+- see commit edd2e21d612af1164afd52666b280d24bc8b21c0
   - FileExistsError: [WinError 183] Cannot create a file when that file already exists: 'yt_videos_list_temp.txt' -> 'CoreySchafer_videos_list.txt'
 - [Force Overwrite in Os.Rename](https://stackoverflow.com/questions/8107352/force-overwrite-in-os-rename) - Stack Overflow
   - Since Python 3.3, there is now a standard cross-platform solution, `os.replace`:
@@ -301,7 +301,10 @@ hasattr(obj, 'attr_name')
 - [os.Rename() Causing Issues on Windows #4510](https://github.com/certbot/certbot/issues/4510) - [certbot/certbot](https://github.com/certbot/certbot/)
 
 ### write problems on Windows
-- see commits [`63cb9660887627aa3f28c3385d23d9d775977d23`](https://github.com/Shail-Shouryya/yt-videos-list/commit/63cb9660887627aa3f28c3385d23d9d775977d23), [`fc278e3af1a944940996d2c5a164f8ed82184cf8`](https://github.com/Shail-Shouryya/yt-videos-list/commit/fc278e3af1a944940996d2c5a164f8ed82184cf8), [`1ed71c6ca78c59f5d1329fddaee5963a0f8828d9`](https://github.com/Shail-Shouryya/yt-videos-list/commit/1ed71c6ca78c59f5d1329fddaee5963a0f8828d9)
+- see the following
+  - commit 63cb9660887627aa3f28c3385d23d9d775977d23
+  - commit fc278e3af1a944940996d2c5a164f8ed82184cf8
+  - commit 1ed71c6ca78c59f5d1329fddaee5963a0f8828d9
 - added
   - `with open('output.csv', 'w+', newline='', encoding='utf-8') as f:`
   - `with open('output.csv', 'r+', newline='', encoding='utf-8') as f:

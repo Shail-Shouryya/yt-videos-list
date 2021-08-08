@@ -108,7 +108,7 @@ def load_video_data(videos_list, visited_videos, video_id_only, reverse_chronolo
             # file(s) already have the information for this video
             continue
         video_data.append([video_number, video_title, video_duration, video_url])
-        video_number -= 1
+        video_number  -= 1
         videos_loaded += 1
         if videos_loaded % 250 == 0:
             log(f'Loaded {videos_loaded} videos into memory...', logging_locations)
@@ -121,8 +121,8 @@ def load_video_data(videos_list, visited_videos, video_id_only, reverse_chronolo
     if video_id_only is True:
         log('Keeping only the video ID from the full video URL...', logging_locations)
         for video_datum in video_data:
-            full_url = video_datum[3]
-            video_id = full_url.split('watch?v=')[1]
+            full_url       = video_datum[3]
+            video_id       = full_url.split('watch?v=')[1]
             video_datum[3] = video_id
         log('Finished formatting the video IDs...\n', logging_locations)
     return video_data

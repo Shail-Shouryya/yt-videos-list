@@ -2,7 +2,7 @@
 YouTube bot to make a YouTube videos list (including all video titles and
 URLs uploaded by a channel) with end-to-end web scraping - no API tokens required.
 🌟 Star this repo if you found it useful! 🌟
-https://github.com/Shail-Shouryya/yt-videos-list
+https://github.com/slow-but-steady/yt-videos-list
 '''
 
 import sys
@@ -16,16 +16,16 @@ from .custom_logger import log
 
 
 __version__              = '0.6.0'
-__author__               = 'Shail-Shouryya'
+__author__               = 'slow-but-steady'
 __email__                = 'yt.videos.list@gmail.com'
 __development_status__   = '4 - Beta'
 __intended_audience__    = 'Developers, Hobbyists'
 __license__              = 'OSI Approved :: Apache License 2.0'
 __ideal_python_version__ = 'Python 3.6+'
-__source__               = 'https://github.com/Shail-Shouryya/yt-videos-list/tree/main/python'
+__source__               = 'https://github.com/slow-but-steady/yt-videos-list/tree/main/python'
 
 
-print(f'=======> NOTE <=======\n\nYou are using yt_videos_list package version >= 0.6.0 (currently {__version__}).\nThere are some formatting changes to the output files as of release 0.6.0 that may **potentially** interfere with your workflow, so please review https://github.com/Shail-Shouryya/yt-videos-list/releases/tag/v.0.6.0 to see if you need to do anything.\nThanks!')
+print(f'=======> NOTE <=======\n\nYou are using yt_videos_list package version >= 0.6.0 (currently {__version__}).\nThere are some formatting changes to the output files as of release 0.6.0 that may **potentially** interfere with your workflow, so please review https://github.com/slow-but-steady/yt-videos-list/releases/tag/v.0.6.0 to see if you need to do anything.\nThanks!')
 
 
 class ListCreator:
@@ -206,7 +206,7 @@ class ListCreator:
     =====================================================
     | If you found this interesting or useful,          |
     | ** please consider STARRING this repo at **       |
-    | https://github.com/Shail-Shouryya/yt-videos-list  |
+    | https://github.com/slow-but-steady/yt-videos-list  |
     | so other people can more easily find and use this.|
     | Thank you!!                                       |
     =====================================================
@@ -240,7 +240,7 @@ class ListCreator:
 
     def __repr__(self):
         '''
-        Returns an unambiguous representation of the current instace that can be used to recreate the same exact object.
+        Returns an unambiguous representation of the current instance that can be used to recreate the same exact object.
         This is useful for internal use and making developer debugging easier.
         '''
         formatted_driver = f"'{self.driver}'" if self.driver else None

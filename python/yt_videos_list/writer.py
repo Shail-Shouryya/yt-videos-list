@@ -35,8 +35,8 @@ def update_file(file_type, file_name, file_buffering, newline, csv_writer, video
     with open(f'{file_name}.{file_type}', mode='r+', newline=newline, encoding='utf-8',  buffering=file_buffering) as old_file, open(f'temp_{file_name}_{timestamp}.{file_type}', mode='w+', newline=newline, encoding='utf-8',  buffering=file_buffering) as temp_file:
         if file_type == 'csv':
             existing_videos = int(max(re.findall('^(\d+)?,', old_file.read(), re.M), key=lambda i: int(i)))
-            fieldnames   = ['Video Number', 'Video Title', 'Video Duration', identifier, 'Watched', 'Watch again later', 'Notes']
-            csv_writer   = csv.DictWriter(temp_file, fieldnames=fieldnames)
+            fieldnames      = ['Video Number', 'Video Title', 'Video Duration', identifier, 'Watched', 'Watch again later', 'Notes']
+            csv_writer      = csv.DictWriter(temp_file, fieldnames=fieldnames)
             if reverse_chronological: csv_writer.writeheader()
         else:
             existing_videos = int(max(re.findall('^(?:### )?Video Number:\s*(\d+)', old_file.read(), re.M), key=lambda i: int(i)))
@@ -106,7 +106,7 @@ def write_csv(writer, video_number, video_title, video_duration, video_url, iden
             'Video Number':      f'{video_number}',
             'Video Title':       f'{video_title}',
             'Video Duration':    f'{video_duration}',
-            identifier:              f'{video_url}',
+            identifier:          f'{video_url}',
             'Watched':           '',
             'Watch again later': '',
             'Notes':              ''

@@ -17,7 +17,7 @@ class Common:
  unsupported_brave_headless = '\nHeadless mode is unsupported in BraveDriver. We are waiting for a Brave release that supports headless before offering support for headless mode to allow remote automation without opening a driver. We will update this when support is added...\n:)\n\n\n'
  unsupported_edge_headless = '\nHeadless mode is unsupported in EdgeDriver. We are waiting for on the Miscrosoft Edge release to start offering support for headless mode to allow remote automation without opening a driver. We will update this when support is added...\n:)\n\n\n'
  unsupported_edge = 'ERROR! Selenium automation with msedgedriver (Microsoft Edge) is not yet supported on your platform. Please use a different browser!'
- unsupported_os = 'The system you are using is not yet supported. Please create an issue at https://github.com/Shail-Shouryya/yt-videos-list/issues\nThanks!'
+ unsupported_os = 'The system you are using is not yet supported. Please create an issue at https://github.com/slow-but-steady/yt-videos-list/issues\nThanks!'
  automated_driver_update = '\n=====> Now updating Selenium driver binaries and fixing any version incompatibility problems. <=====\nThis will update all corresponding Selenium drivers for browsers (which are installed in their default locations and) supported by the yt_videos_list package...'
  url_prefix_geckodriver = 'https://github.com/mozilla/geckodriver/releases/download'
  url_prefix_operadriver = 'https://github.com/operasoftware/operachromiumdriver/releases/download'
@@ -314,7 +314,7 @@ class Common:
   print(f'\nFound an installed version of {browser}.\nYou are currently running {browser} version: {full_version_number}')
  @staticmethod
  def display_browser_not_found_information(browser, user_os):
-  print(f'\nDid not find an installed version of {browser}.\nIf you DO have {browser} installed but it was not detected, it may be because your {browser} was installed in a non-default location.\nPlease modify the commands under the {browser} you want to use at https://github.com/Shail-Shouryya/yt-videos-list/blob/main/docs/dependencies_pseudo_json.txt for {user_os.title()}"\nIf you are unsure how to do that, please file an issue at https://github.com/Shail-Shouryya/yt-videos-list/issues and we will respond as soon as possible!')
+  print(f'\nDid not find an installed version of {browser}.\nIf you DO have {browser} installed but it was not detected, it may be because your {browser} was installed in a non-default location.\nPlease modify the commands under the {browser} you want to use at https://github.com/slow-but-steady/yt-videos-list/blob/main/docs/dependencies_pseudo_json.txt for {user_os.title()}"\nIf you are unsure how to do that, please file an issue at https://github.com/slow-but-steady/yt-videos-list/issues and we will respond as soon as possible!')
  @classmethod
  def display_url_error(cls, error_message):
   print(f'{cls.offset}{cls.error}The url you provided could not be parsed properly. Please check the url you provided to make sure there are no typos! For further debugging, this was the exact error message (might also be blank):\n{error_message}{cls.offset}')
@@ -360,7 +360,7 @@ class Common:
   print(f'pip{cls.ds}install -U yt-videos-list #Windows\npip3 install -U yt-videos-list #MacOS/Linux\n\n')
   print('If that does not work, try:')
   print(f'python{cls.ds}-m pip install -U yt-videos-list #Windows\npython3 -m pip install -U yt-videos-list #MacOS/Linux\n')
-  print('If this still doesn\'t fix the problem, please try using a different driver or file an issue at https://github.com/Shail-Shouryya/yt-videos-list/issues')
+  print('If this still doesn\'t fix the problem, please try using a different driver or file an issue at https://github.com/slow-but-steady/yt-videos-list/issues')
   print(f'The problem is likely caused by trying to run yt_videos_list with an updated version of the driver you\'re trying to use than what yt_videos_list currently supports (we update the binaries a few weeks after the initial release to allow time for bug fixing). If this is the case, the version of the driver downloaded won\'t match the output of\n"You are currently running {user_driver} version: " above.\n')
   print('To see other drivers you can use (and other options), run:\n')
   print('import yt_videos_list\nhelp(yt_videos_list)')
