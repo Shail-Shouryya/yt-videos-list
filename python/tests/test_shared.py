@@ -43,8 +43,8 @@ def run_tests_for(browsers_list):
     test_cases = create_test_cases(browsers_list)
     total      = len(test_cases)
     current    = 0
-    log_test_info('*' * 140,        'CoreySchafer_reverse_chronological_videos_list.log', 'CoreySchafer_chronological_videos_list.log')
-    log_test_info('Running tests!', 'CoreySchafer_reverse_chronological_videos_list.log', 'CoreySchafer_chronological_videos_list.log')
+    log_test_info('*' * 140,        'CoreySchafer_reverse_chronological_videos_list.log', 'CoreySchafer_chronological_videos_list.log', 'CoreySchafer_reverse_chronological_video_ids_list.log', 'CoreySchafer_chronological_video_ids_list.log')
+    log_test_info('Running tests!', 'CoreySchafer_reverse_chronological_videos_list.log', 'CoreySchafer_chronological_videos_list.log', 'CoreySchafer_reverse_chronological_video_ids_list.log', 'CoreySchafer_chronological_video_ids_list.log')
     while current < total:
         # each test_case is a ListCreator instance with
         # reverse_chronological set to True or False
@@ -59,8 +59,9 @@ def run_tests_for(browsers_list):
             # number of threads we've created
             # manually
             thread_1_case      = test_cases[current]
-            if getattr(thread_1_case, 'reverse_chronological') is True: log_1_name = 'CoreySchafer_reverse_chronological_videos_list.log'
-            else:                                                       log_1_name = 'CoreySchafer_chronological_videos_list.log'
+            is_id = '_id' if getattr(thread_1_case, 'video_id_only') is True else ''
+            if getattr(thread_1_case, 'reverse_chronological') is True: log_1_name = f'CoreySchafer_reverse_chronological_video{is_id}s_list.log'
+            else:                                                       log_1_name = f'CoreySchafer_chronological_video{is_id}s_list.log'
             test_case_thread_1 = ThreadWithResult(target=run_test_case, args=(thread_1_case, log_1_name))
             log_test_info('Starting thread for test case 1...', log_1_name)
             test_case_thread_1.start()
@@ -73,8 +74,9 @@ def run_tests_for(browsers_list):
                     # wait 5 seconds to allow all just the firefox selenium webdriver dependency to download (necessary after test_cross_platforms module runs remove_dependencies())
                     time.sleep(5)
                 thread_2_case      = test_cases[current]
-                if getattr(thread_2_case, 'reverse_chronological') is True: log_2_name = 'CoreySchafer_reverse_chronological_videos_list.log'
-                else:                                                       log_2_name = 'CoreySchafer_chronological_videos_list.log'
+                is_id = '_id' if getattr(thread_2_case, 'video_id_only') is True else ''
+                if getattr(thread_2_case, 'reverse_chronological') is True: log_2_name = f'CoreySchafer_reverse_chronological_video{is_id}s_list.log'
+                else:                                                       log_2_name = f'CoreySchafer_chronological_video{is_id}s_list.log'
                 test_case_thread_2 = ThreadWithResult(target=run_test_case, args=(thread_2_case, log_2_name))
                 log_test_info('Starting thread for test case 2...', log_2_name)
                 test_case_thread_2.start()
@@ -102,8 +104,9 @@ def create_test_cases(browsers):
     for each driver in the provided `browsers` list.
     '''
     return [
-        ListCreator(driver=browser, reverse_chronological=is_reverse_chronological)
+        ListCreator(driver=browser, reverse_chronological=is_reverse_chronological, video_id_only=is_video_id_only)
         for browser in browsers
+        for is_video_id_only         in [True, False]
         for is_reverse_chronological in [True, False]
     ]
 
@@ -125,8 +128,10 @@ def run_test_case(list_creator, log_file):
     path_slash               = determine_path_slash()
     schafer5_url             = 'youtube.com/user/schafer5'
     is_reverse_chronological = getattr(list_creator, 'reverse_chronological')
-    if is_reverse_chronological: delete_all_schafer5_files('reverse_chronological_videos_list'); return verify_update(list_creator, schafer5_url, f'tests{path_slash}reference_files{path_slash}partial_CoreySchafer_reverse_chronological_videos_list', f'tests{path_slash}reference_files{path_slash}full_CoreySchafer_reverse_chronological_videos_list', log_file)
-    else:                        delete_all_schafer5_files('chronological_videos_list');         return verify_update(list_creator, schafer5_url, f'tests{path_slash}reference_files{path_slash}partial_CoreySchafer_chronological_videos_list',         f'tests{path_slash}reference_files{path_slash}full_CoreySchafer_chronological_videos_list', log_file)
+    is_video_id_only         = getattr(list_creator, 'video_id_only')
+    is_id = '_id' if is_video_id_only else ''
+    if is_reverse_chronological: delete_all_schafer5_files('reverse_chronological_videos_list'); return verify_update(list_creator, schafer5_url, f'tests{path_slash}reference_files{path_slash}partial_CoreySchafer_reverse_chronological_video{is_id}s_list', f'tests{path_slash}reference_files{path_slash}full_CoreySchafer_reverse_chronological_video{is_id}s_list', log_file)
+    else:                        delete_all_schafer5_files('chronological_videos_list');         return verify_update(list_creator, schafer5_url, f'tests{path_slash}reference_files{path_slash}partial_CoreySchafer_chronological_video{is_id}s_list',         f'tests{path_slash}reference_files{path_slash}full_CoreySchafer_chronological_video{is_id}s_list', log_file)
 
 
 def delete_all_schafer5_files(suffix):
@@ -172,11 +177,13 @@ def verify_update(driver, schafer5_url, test_file, full_file, log_file):
         use_partial_md_only
         ]
     for create_file in variations:
+        is_video_id_only         = vars   (driver)["video_id_only"]
         is_reverse_chronological = vars   (driver)['reverse_chronological']
         driver_name              = getattr(driver, 'driver')
-        log_test_info(f'TESTING list_creator with list_creator.reverse_chronological set to {is_reverse_chronological} for {driver_name}driver', log_file)
-        if is_reverse_chronological: suffix = 'reverse_chronological_videos_list'
-        else:                        suffix = 'chronological_videos_list'
+        log_test_info(f'TESTING list_creator with list_creator.video_id_only set to {is_video_id_only} and list_creator.reverse_chronological set to {is_reverse_chronological} for {driver_name}driver', log_file)
+        is_id = '_id' if is_video_id_only is True else ''
+        if is_reverse_chronological: suffix = f'reverse_chronological_video{is_id}s_list'
+        else:                        suffix = f'chronological_video{is_id}s_list'
         create_file(test_file, suffix, log_file) # the file this function creates should be the SAME as the returned string to the file_name variable in the next line
         test_output_file = driver.create_list_for(schafer5_url, log_silently=True)[1][1]
         # verify calling the create_list_for() method updates the partial file properly
