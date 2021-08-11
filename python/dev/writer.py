@@ -47,8 +47,9 @@ def create_writer(file_type, file, csv_writer, logging_locations, identifier, vi
 # then take the contents of the original file and append it to the end of the temp file before renaming temp file to file_name.txt (overwrites original file)
 
 @time_writer_function
-def update_file(file_type, file_name, file_buffering, newline, csv_writer, timestamp, logging_locations, identifier, reverse_chronological, video_data, visited_videos):
+def update_file(file_type, file_name, file_buffering, newline, csv_writer, timestamp, logging_locations, identifier, reverse_chronological, video_data, visited_videos, video_id_only):
     if visited_videos is None: visited_videos = store_already_written_videos(file_name, file_type)
+    visited_videos = format_visited_videos_for_id(visited_videos, video_id_only, logging_locations)
     with open(f'{file_name}.{file_type}', mode='r+', newline=newline, encoding='utf-8',  buffering=file_buffering) as old_file, open(f'temp_{file_name}_{timestamp}.{file_type}', mode='w+', newline=newline, encoding='utf-8',  buffering=file_buffering) as temp_file:
         if file_type == 'csv':
             number_of_existing_videos = int(max(re.findall('^(\d+)?,', old_file.read(), re.M), key=lambda i: int(i)))
@@ -59,6 +60,18 @@ def update_file(file_type, file_name, file_buffering, newline, csv_writer, times
             number_of_existing_videos = int(max(re.findall('^(?:### )?Video Number:\s*(\d+)', old_file.read(), re.M), key=lambda i: int(i)))
         new_videos = update_writer(file_type, temp_file, old_file, csv_writer, logging_locations, identifier, reverse_chronological, video_data, visited_videos, number_of_existing_videos)
     return file_name, new_videos, reverse_chronological, logging_locations
+
+def format_visited_videos_for_id(visited_videos, video_id_only, logging_locations):
+    if video_id_only is True:
+        log('Updating set to keep only the video ID from the full video URL...', logging_locations)
+        formatted_visited_videos = set()
+        while visited_videos:
+            full_url       = visited_videos.pop()
+            video_id       = full_url.split('watch?v=')[1]
+            formatted_visited_videos.add(video_id)
+        log('Finished formatting the video IDs in the set...\n', logging_locations)
+        visited_videos = formatted_visited_videos
+    return visited_videos
 
 def update_writer(file_type, new_file, old_file, csv_writer, logging_locations, identifier, reverse_chronological, video_data, visited_videos, number_of_existing_videos):
     new_videos   = find_number_of_new_videos(video_data, visited_videos)

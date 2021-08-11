@@ -50,7 +50,7 @@ def determine_action(url, driver, video_id_only, scroll_pause_time, verify_page_
         threads = []
         def call(function, file_type, visited_videos=None):
             newline = '' if file_type == 'csv' else None
-            if function == 'update_file': return threading.Thread(target=writer.update_file, args=(file_type, file_name, file_buffering, newline, csv_writer, now(), logging_locations, identifier, reverse_chronological, video_data, visited_videos))
+            if function == 'update_file': return threading.Thread(target=writer.update_file, args=(file_type, file_name, file_buffering, newline, csv_writer, now(), logging_locations, identifier, reverse_chronological, video_data, visited_videos, video_id_only))
             else:                         return threading.Thread(target=writer.create_file, args=(file_type, file_name, file_buffering, newline, csv_writer, now(), logging_locations, identifier, reverse_chronological, video_data))
         if txt:
             if txt_exists: txt_thread = call('update_file', 'txt', txt_videos)
@@ -76,7 +76,7 @@ def determine_action(url, driver, video_id_only, scroll_pause_time, verify_page_
         # the MainThread could be doing.
         def call(function, file_type, visited_videos=None):
             newline = '' if file_type == 'csv' else None
-            if function == 'update_file': return writer.update_file(file_type, file_name, file_buffering, newline, csv_writer, now(), logging_locations, identifier, reverse_chronological, video_data, visited_videos)
+            if function == 'update_file': return writer.update_file(file_type, file_name, file_buffering, newline, csv_writer, now(), logging_locations, identifier, reverse_chronological, video_data, visited_videos, video_id_only)
             else:                         return writer.create_file(file_type, file_name, file_buffering, newline, csv_writer, now(), logging_locations, identifier, reverse_chronological, video_data)
         if txt:
             if txt_exists: call('update_file', 'txt', txt_videos)
