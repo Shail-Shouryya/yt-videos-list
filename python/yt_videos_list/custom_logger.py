@@ -7,9 +7,9 @@ def log(message, logging_locations):
  thread_name = f'[{threading.current_thread().name}]'
  current_time = datetime.datetime.now().isoformat()
  utc_offset = time.strftime('%z')
- message = f'{current_time}{utc_offset} {thread_name:>12} {message}\n'
+ formatted_message = f'{current_time}{utc_offset} {thread_name:>12} {message}\n'
  for location in logging_locations:
-  location.write(message)
+  location.write(formatted_message)
 def log_extraction_information(function, writer_function, args, kwargs):
  start_time = time.perf_counter()
  extension = args[0]
