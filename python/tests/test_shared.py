@@ -180,7 +180,7 @@ def verify_update(driver, schafer5_url, test_file, full_file, log_file):
         is_video_id_only         = vars   (driver)["video_id_only"]
         is_reverse_chronological = vars   (driver)['reverse_chronological']
         driver_name              = getattr(driver, 'driver')
-        log_test_info(f'TESTING list_creator with list_creator.video_id_only set to {is_video_id_only} and list_creator.reverse_chronological set to {is_reverse_chronological} for {driver_name}driver', log_file)
+        log_test_info(f'TESTING list_creator.video_id_only={is_video_id_only}, list_creator.reverse_chronological={is_reverse_chronological} for {driver_name}driver', log_file)
         is_id = '_id' if is_video_id_only is True else ''
         if is_reverse_chronological: suffix = f'reverse_chronological_video{is_id}s_list'
         else:                        suffix = f'chronological_video{is_id}s_list'
