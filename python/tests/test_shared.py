@@ -130,8 +130,12 @@ def run_test_case(list_creator, log_file):
     is_reverse_chronological = getattr(list_creator, 'reverse_chronological')
     is_video_id_only         = getattr(list_creator, 'video_id_only')
     is_id = '_id' if is_video_id_only else ''
-    if is_reverse_chronological: delete_all_schafer5_files('reverse_chronological_videos_list'); return verify_update(list_creator, schafer5_url, f'tests{path_slash}reference_files{path_slash}partial_CoreySchafer_reverse_chronological_video{is_id}s_list', f'tests{path_slash}reference_files{path_slash}full_CoreySchafer_reverse_chronological_video{is_id}s_list', log_file)
-    else:                        delete_all_schafer5_files('chronological_videos_list');         return verify_update(list_creator, schafer5_url, f'tests{path_slash}reference_files{path_slash}partial_CoreySchafer_chronological_video{is_id}s_list',         f'tests{path_slash}reference_files{path_slash}full_CoreySchafer_chronological_video{is_id}s_list', log_file)
+    if is_reverse_chronological: suffix = f'reverse_chronological_video{is_id}s_list'
+    else:                        suffix = f'chronological_video{is_id}s_list'
+    partialfile_path = f'tests{path_slash}reference_files{path_slash}partial_CoreySchafer_{suffix}'
+    fullfile_path    = f'tests{path_slash}reference_files{path_slash}full_CoreySchafer_{suffix}'
+    if is_reverse_chronological: delete_all_schafer5_files('reverse_chronological_videos_list'); return verify_update(list_creator, schafer5_url, partialfile_path, fullfile_path, log_file)
+    else:                        delete_all_schafer5_files('chronological_videos_list');         return verify_update(list_creator, schafer5_url, partialfile_path, fullfile_path, log_file)
 
 
 def delete_all_schafer5_files(suffix):
