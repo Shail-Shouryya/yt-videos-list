@@ -184,6 +184,7 @@ def verify_update(driver, schafer5_url, test_file, full_file, log_file):
         is_reverse_chronological = vars   (driver)['reverse_chronological']
         driver_name              = getattr(driver, 'driver')
         log_test_info(f'TESTING list_creator.video_id_only={is_video_id_only}, list_creator.reverse_chronological={is_reverse_chronological} for {driver_name}driver', log_file)
+        log_test_info(f'Full configuration: {repr(driver)}', log_file)
         is_id  = '_id'                                       if is_video_id_only         else  ''
         suffix = f'reverse_chronological_video{is_id}s_list' if is_reverse_chronological else f'chronological_video{is_id}s_list'
         create_file(test_file, suffix, log_file) # the file this function creates should be the SAME as the returned string to the file_name variable in the next line
