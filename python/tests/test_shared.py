@@ -161,13 +161,13 @@ def delete_file(filepath, extension):
     if os.path.exists(f'{filepath}.{extension}'):
         os.remove(f'{filepath}.{extension}')
 
-def verify_update(driver, schafer5_url, test_file, full_file, log_file):
+def verify_update(list_creator, schafer5_url, test_file, full_file, log_file):
     '''
-    Uses the `reverse_chronological` attribute of the `driver`
+    Uses the `reverse_chronological` attribute of the `list_creator`
     argument to determine the suffix, then uses the reference
     `test_file` to create a partial test file. Runs the
     `create_list_for(schafer5_url)` method on the provided
-    `driver` instance. Calls
+    `list_creator` instance. Calls
     `compare_test_files_to_reference_files(full_file, file_name)`
     to ensure content in the created output files match the
     content in the full reference files.
@@ -180,15 +180,15 @@ def verify_update(driver, schafer5_url, test_file, full_file, log_file):
         use_partial_md_only
         ]
     for create_file in variations:
-        is_video_id_only         = vars   (driver)["video_id_only"]
-        is_reverse_chronological = vars   (driver)['reverse_chronological']
-        driver_name              = getattr(driver, 'driver')
+        is_video_id_only         = vars   (list_creator)["video_id_only"]
+        is_reverse_chronological = vars   (list_creator)['reverse_chronological']
+        driver_name              = getattr(list_creator, 'driver')
         log_test_info(f'TESTING list_creator.video_id_only={is_video_id_only}, list_creator.reverse_chronological={is_reverse_chronological} for {driver_name}driver', log_file)
-        log_test_info(f'Full configuration: {repr(driver)}', log_file)
+        log_test_info(f'Full configuration: {repr(list_creator)}', log_file)
         is_id  = '_id'                                       if is_video_id_only         else  ''
         suffix = f'reverse_chronological_video{is_id}s_list' if is_reverse_chronological else f'chronological_video{is_id}s_list'
         create_file(test_file, suffix, log_file) # the file this function creates should be the SAME as the returned string to the file_name variable in the next line
-        test_output_file = driver.create_list_for(schafer5_url, log_silently=True)[1][1]
+        test_output_file = list_creator.create_list_for(schafer5_url, log_silently=True)[1][1]
         # verify calling the create_list_for() method updates the partial file properly
         failed = compare_test_files_to_reference_files(full_file, test_output_file, log_file)
         if failed == 'Failed!':
