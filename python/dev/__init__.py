@@ -276,6 +276,14 @@ class ListCreator:
 
     def create_list_for(self, url=None, log_silently=False, file_name='auto'):
         '''
+        Returns a tuple containing 2 values:
+          -> Value 1:
+            --> a list of lists containing the video data for all videos scraped from the channel when self.video_data_returned=True
+            --> a list of lists containing **dummy data**                                         when self.video_data_returned=False
+              -> self.video_data_returned=False by default to avoid cluttering the terminal output with data
+          -> Value 2:
+            -> a tuple containing the channel name and the name of the output file(s) without the file extension(s)
+
         The create_list_for() method creates a list using the arguments specified during instantiation of the ListCreator object.
         You need to specify just the url to the channel you want to scrape.
 
